@@ -1,17 +1,7 @@
-import { readFileSync } from "node:fs";
 import { createServer } from "node:http";
-import { createYoga, createSchema } from "graphql-yoga";
-import { Resolvers } from "./resolvers-types";
+import { createYoga } from "graphql-yoga";
+import { schema } from "./schema";
 
-const typeDefs = readFileSync("./schema.graphql", "utf8");
-
-const resolvers: Resolvers = {
-  Query: {
-    // typed resolvers!
-  },
-};
-
-const schema = createSchema({ typeDefs, resolvers });
 const yoga = createYoga({ schema });
 const server = createServer(yoga);
 
